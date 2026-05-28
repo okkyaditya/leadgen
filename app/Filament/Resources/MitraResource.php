@@ -113,7 +113,7 @@ class MitraResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        $query = parent::getEloquentQuery();
+        $query = parent::getEloquentQuery()->with(['upline']);
         
         $user = auth()->user();
         if ($user && $user->hasAnyRole(['supervisor', 'support'])) {

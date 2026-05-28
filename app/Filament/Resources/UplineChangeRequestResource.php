@@ -15,11 +15,16 @@ class UplineChangeRequestResource extends Resource
 {
     protected static ?string $model = UplineChangeRequest::class;
     protected static ?string $navigationIcon = 'heroicon-o-arrows-right-left';
-    protected static ?string $navigationGroup = 'Data';
+    protected static ?string $navigationGroup = 'System';
 
     public static function canAccess(): bool
     {
-        return auth()->user()->hasAnyRole(['admin', 'manager', 'supervisor']);
+        return auth()->user() && auth()->user()->hasAnyRole(['admin', 'manager', 'supervisor']);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with(['mitra', 'newUpline']);
     }
 
     public static function form(Form $form): Form

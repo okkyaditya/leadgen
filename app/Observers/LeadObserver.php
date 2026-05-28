@@ -24,6 +24,17 @@ class LeadObserver
         ]);
     }
 
+    public function creating(Lead $lead): void
+    {
+        if (Auth::guard('web')->check()) {
+            $user = Auth::guard('web')->user();
+            $lead->cabang = $user->cabang ?? null;
+        } elseif (Auth::guard('mitra')->check()) {
+            $mitra = Auth::guard('mitra')->user();
+            $lead->cabang = $mitra->upline?->cabang ?? null;
+        }
+    }
+
     public function created(Lead $lead): void
     {
         $this->logAction($lead, 'created', $lead->getAttributes());

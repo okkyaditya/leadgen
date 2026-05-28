@@ -25,6 +25,7 @@ class MitraPanelProvider extends PanelProvider
         return $panel
             ->id('mitra')
             ->path('mitra')
+            ->brandName('Salestracker')
             ->login(\App\Filament\Pages\Auth\Login::class)
             ->colors([
                 'primary' => Color::Amber,

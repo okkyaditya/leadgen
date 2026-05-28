@@ -13,7 +13,7 @@ class Lead extends Model
     protected $fillable = [
         'nama', 'telepon', 'nik', 'produk', 'ntf', 
         'unit', 'no_unit', 'owner_type', 'owner_id', 
-        'input_by', 'source_mitra_id'
+        'input_by', 'source_mitra_id', 'cabang', 'domisili'
     ];
 
     public function owner()

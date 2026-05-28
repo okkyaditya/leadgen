@@ -26,8 +26,20 @@ class LeadResource extends Resource
                     ->description('Lengkapi detail data prospek/lead baru.')
                     ->schema([
                         TextInput::make('nama')->required()->maxLength(150),
-                        TextInput::make('telepon')->required()->maxLength(20),
-                        TextInput::make('nik')->required()->maxLength(20),
+                        TextInput::make('telepon')
+                            ->required()
+                            ->maxLength(16)
+                            ->regex('/^[0-9]+$/')
+                            ->validationMessages([
+                                'regex' => 'Nomor telepon hanya boleh berisi angka.',
+                            ]),
+                        TextInput::make('nik')
+                            ->required()
+                            ->maxLength(16)
+                            ->regex('/^[0-9]+$/')
+                            ->validationMessages([
+                                'regex' => 'NIK hanya boleh berisi angka.',
+                            ]),
                         Select::make('produk')
                             ->options([
                                 'NDF Car' => 'NDF Car',
@@ -42,6 +54,15 @@ class LeadResource extends Resource
                         TextInput::make('ntf')->numeric(),
                         TextInput::make('unit')->maxLength(100),
                         TextInput::make('no_unit')->maxLength(50),
+                        TextInput::make('cabang')
+                            ->label('Cabang')
+                            ->default(fn () => auth()->user()->upline?->cabang ?? null)
+                            ->disabled()
+                            ->dehydrated(),
+                        TextInput::make('domisili')
+                            ->label('Domisili')
+                            ->required()
+                            ->maxLength(150),
                         Forms\Components\Hidden::make('owner_type')
                             ->default('mitra'),
                         Forms\Components\Hidden::make('owner_id')

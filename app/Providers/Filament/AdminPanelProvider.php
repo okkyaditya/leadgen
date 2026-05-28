@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('Salestracker')
             ->login(\App\Filament\Pages\Auth\Login::class)
             ->colors([
                 'primary' => Color::Amber,
@@ -37,8 +38,13 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\DashboardOverview::class,
+                \App\Filament\Widgets\DailyLeadChart::class,
+                \App\Filament\Widgets\MonthlyLeadChart::class,
+                \App\Filament\Widgets\ProductLeadChart::class,
+                \App\Filament\Widgets\TopMitraTable::class,
+                \App\Filament\Widgets\TopSupportTable::class,
+                \App\Filament\Widgets\TopBranchTable::class,
             ])
             ->middleware([
                 EncryptCookies::class,
