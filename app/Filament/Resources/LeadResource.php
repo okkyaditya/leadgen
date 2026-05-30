@@ -93,10 +93,6 @@ class LeadResource extends Resource
                 Tables\Columns\TextColumn::make('inputBy.nama')
                     ->label('Input Oleh')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('cabang')
-                    ->label('Cabang')
-                    ->searchable()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('domisili')
                     ->label('Domisili')
                     ->searchable(),

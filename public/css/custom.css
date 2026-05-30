@@ -1,0 +1,27 @@
+/* Login Page Custom Background */
+.fi-simple-layout {
+    background-image: url('/images/login-bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Sidebar and Main Layout Differentiation */
+.fi-sidebar {
+    background-color: #f1f5f9 !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+.fi-main {
+    background-color: #ffffff !important;
+}
+
+/* Dark Mode Support */
+.dark .fi-sidebar {
+    background-color: #0f172a !important;
+    border-right: 1px solid #1e293b !important;
+}
+
+.dark .fi-main {
+    background-color: #1e293b !important;
+}

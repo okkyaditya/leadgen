@@ -6,6 +6,8 @@ use App\Filament\Resources\MitraResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
+use App\Filament\Resources\MitraResource\Widgets\MitraOverview;
+
 class ListMitras extends ListRecords
 {
     protected static string $resource = MitraResource::class;
@@ -14,6 +16,13 @@ class ListMitras extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            MitraOverview::class,
         ];
     }
 }

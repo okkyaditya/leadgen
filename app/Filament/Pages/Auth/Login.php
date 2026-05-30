@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Component;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\HtmlString;
 
 class Login extends BaseLogin
 {
@@ -14,16 +15,17 @@ class Login extends BaseLogin
     {
         return $form
             ->schema([
-                $this->getNikFormComponent(),
+                $this->getEmailFormComponent(),
                 $this->getPasswordFormComponent(),
                 $this->getRememberFormComponent(),
             ]);
     }
 
-    protected function getNikFormComponent(): Component
+    protected function getEmailFormComponent(): Component
     {
-        return TextInput::make('nik')
-            ->label('NIK')
+        return TextInput::make('email')
+            ->label(__('filament-panels::pages/auth/login.form.email.label'))
+            ->email()
             ->required()
             ->autocomplete()
             ->autofocus()
@@ -33,7 +35,7 @@ class Login extends BaseLogin
     protected function getCredentialsFromFormData(array $data): array
     {
         return [
-            'nik' => $data['nik'],
+            'email' => $data['email'],
             'password' => $data['password'],
         ];
     }
@@ -41,7 +43,7 @@ class Login extends BaseLogin
     protected function throwFailureValidationException(): never
     {
         throw ValidationException::withMessages([
-            'data.nik' => __('filament-panels::pages/auth/login.messages.failed'),
+            'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
         ]);
     }
 }

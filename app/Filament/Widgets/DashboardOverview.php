@@ -10,37 +10,37 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class DashboardOverview extends BaseWidget
 {
+    protected static ?int $sort = 1;
+    protected int | string | array $columnSpan = 'full';
+
     protected function getStats(): array
     {
-        $totalManagers = User::where('role', 'manager')->count();
-        $totalSupervisors = User::where('role', 'supervisor')->count();
-        $totalSupports = User::where('role', 'support')->count();
-        $totalMitras = Mitra::count();
-        
-        $monthlyNtf = Lead::whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->sum('ntf');
+        $totalMitra = Mitra::count();
+        $mitraAktif = Mitra::where('is_active', true)->count();
+        $totalUser = User::whereIn('role', ['manager', 'supervisor', 'support'])->count();
+        $potentialNtf = Lead::sum('ntf');
+        $ticketSize = Lead::avg('ntf') ?? 0;
 
         return [
-            Stat::make('Total Manager', $totalManagers)
-                ->description('Total akun internal Manager')
-                ->descriptionIcon('heroicon-m-briefcase')
-                ->color('success'),
-            Stat::make('Total Supervisor', $totalSupervisors)
-                ->description('Total akun internal Supervisor')
-                ->descriptionIcon('heroicon-m-academic-cap')
-                ->color('warning'),
-            Stat::make('Total Support', $totalSupports)
-                ->description('Total akun internal Support')
-                ->descriptionIcon('heroicon-m-wrench-screwdriver')
-                ->color('info'),
-            Stat::make('Total Mitra', $totalMitras)
-                ->description('Total mitra eksternal terdaftar')
-                ->descriptionIcon('heroicon-m-user-group')
+            Stat::make('Total Mitra', $totalMitra)
+                ->description('Total mitra aktif & non aktif')
+                ->icon('heroicon-m-user-group')
                 ->color('primary'),
-            Stat::make('Monthly Potential NTF', 'Rp ' . number_format($monthlyNtf, 0, ',', '.'))
-                ->description('Estimasi NTF bulan berjalan')
-                ->descriptionIcon('heroicon-m-currency-dollar')
+            Stat::make('Mitra Aktif', $mitraAktif)
+                ->description('Total mitra aktif')
+                ->icon('heroicon-m-check-circle')
+                ->color('success'),
+            Stat::make('Total User', $totalUser)
+                ->description('Manager + Supervisor + Support')
+                ->icon('heroicon-m-users')
+                ->color('info'),
+            Stat::make('Potential NTF', 'Rp ' . number_format($potentialNtf, 0, ',', '.'))
+                ->description('Akumulasi NTF Leads')
+                ->icon('heroicon-m-currency-dollar')
+                ->color('warning'),
+            Stat::make('Ticket Size', 'Rp ' . number_format($ticketSize, 0, ',', '.'))
+                ->description('Rata-rata NTF Leads')
+                ->icon('heroicon-m-chart-bar')
                 ->color('success'),
         ];
     }

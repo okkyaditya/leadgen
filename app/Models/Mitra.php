@@ -14,7 +14,7 @@ class Mitra extends Authenticatable implements HasName
     protected $table = 'mitra';
 
     protected $fillable = [
-        'nik', 'password', 'nama', 'telepon', 'profesi', 
+        'nik', 'password', 'nama', 'telepon', 'email', 'profesi', 
         'tanggal_lahir', 'domisili', 'upline_id', 'is_active', 
         'is_active_reason', 'last_login_at'
     ];

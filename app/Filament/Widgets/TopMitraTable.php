@@ -10,7 +10,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class TopMitraTable extends BaseWidget
 {
     protected static ?string $heading = 'Top 10 Mitra dengan Lead Terbanyak';
-    protected int | string | array $columnSpan = 'one';
+    protected int | string | array $columnSpan = 4;
+    protected static ?int $sort = 6;
 
     public function table(Table $table): Table
     {

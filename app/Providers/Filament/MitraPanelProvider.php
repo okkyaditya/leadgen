@@ -30,6 +30,14 @@ class MitraPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->renderHook(
+                'panels::head.end',
+                fn () => new \Illuminate\Support\HtmlString('<link rel="stylesheet" href="/css/custom.css?v=1.0.2">')
+            )
+            ->renderHook(
+                'panels::auth.login.form.after',
+                fn () => new \Illuminate\Support\HtmlString('<div class="text-center mt-6"><a href="https://wa.me/6281234567890?text=Ask%20Admin%20to%20Sign%20Up" target="_blank" class="text-primary-600 hover:underline text-sm font-semibold" style="color: var(--primary-600) !important; font-weight: 600;">Ask Admin to Sign Up</a></div>')
+            )
             ->discoverResources(in: app_path('Filament/Mitra/Resources'), for: 'App\\Filament\\Mitra\\Resources')
             ->discoverPages(in: app_path('Filament/Mitra/Pages'), for: 'App\\Filament\\Mitra\\Pages')
             ->pages([

@@ -18,11 +18,13 @@ class User extends Authenticatable implements HasName
         'nama',
         'nik',
         'telepon',
+        'email',
         'role',
         'cabang',
         'hire_date',
         'password',
         'is_active',
+        'supervisor_id',
     ];
 
     /**
@@ -55,6 +57,16 @@ class User extends Authenticatable implements HasName
             'password' => 'hashed',
             'hire_date' => 'date',
         ];
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'supervisor_id')->where('role', 'supervisor');
+    }
+
+    public function supports()
+    {
+        return $this->hasMany(User::class, 'supervisor_id');
     }
 
     public function mitra()

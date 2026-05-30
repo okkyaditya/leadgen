@@ -7,11 +7,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
-class TopSupportTable extends BaseWidget
+class TopSupportLeadsTable extends BaseWidget
 {
-    protected static ?string $heading = 'Top 10 Support dengan Mitra Terbanyak';
+    protected static ?string $heading = 'Top 10 Support dengan Lead Terbanyak';
     protected int | string | array $columnSpan = 4;
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 4;
 
     public function table(Table $table): Table
     {
@@ -19,8 +19,8 @@ class TopSupportTable extends BaseWidget
             ->query(
                 User::query()
                     ->where('role', 'support')
-                    ->withCount('mitra')
-                    ->orderByDesc('mitra_count')
+                    ->withCount('leads')
+                    ->orderByDesc('leads_count')
                     ->limit(10)
             )
             ->columns([
@@ -29,11 +29,11 @@ class TopSupportTable extends BaseWidget
                     ->searchable(),
                 Tables\Columns\TextColumn::make('cabang')
                     ->label('Cabang'),
-                Tables\Columns\TextColumn::make('mitra_count')
-                    ->label('Jumlah Mitra')
+                Tables\Columns\TextColumn::make('leads_count')
+                    ->label('Jumlah Lead')
                     ->sortable()
                     ->badge()
-                    ->color('info'),
+                    ->color('success'),
             ])
             ->paginated(false);
     }

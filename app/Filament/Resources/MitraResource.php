@@ -50,6 +50,11 @@ class MitraResource extends Resource
                                 'regex' => 'Nomor telepon hanya boleh berisi angka.',
                             ])
                             ->unique(ignoreRecord: true),
+                        TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(191)
+                            ->unique(ignoreRecord: true),
                         TextInput::make('password')
                             ->password()
                             ->dehydrateStateUsing(fn ($state) => Hash::make($state))
@@ -80,6 +85,7 @@ class MitraResource extends Resource
                 Tables\Columns\TextColumn::make('nik')->searchable(),
                 Tables\Columns\TextColumn::make('nama')->searchable(),
                 Tables\Columns\TextColumn::make('telepon')->searchable(),
+                Tables\Columns\TextColumn::make('email')->searchable(),
                 Tables\Columns\TextColumn::make('upline.nama')->label('Upline')->searchable(),
                 Tables\Columns\IconColumn::make('is_active')->boolean(),
                 Tables\Columns\TextColumn::make('last_login_at')->dateTime()->sortable(),
@@ -97,9 +103,11 @@ class MitraResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getWidgets(): array
     {
-        return [];
+        return [
+            MitraResource\Widgets\MitraOverview::class,
+        ];
     }
 
     public static function getPages(): array

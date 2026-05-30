@@ -34,15 +34,15 @@ class LeadOverview extends BaseWidget
         return [
             Stat::make('Total Lead', $totalLeads)
                 ->description('Total prospek terdaftar')
-                ->descriptionIcon('heroicon-m-document-text')
+                ->icon('heroicon-m-document-text')
                 ->color('primary'),
             Stat::make('Leads/Month', $leadsThisMonth)
                 ->description('Prospek baru bulan ini')
-                ->descriptionIcon('heroicon-m-calendar-days')
+                ->icon('heroicon-m-calendar-days')
                 ->color('info'),
             Stat::make('Potensial NTF', 'Rp ' . number_format($totalNtf, 0, ',', '.'))
                 ->description('Akumulasi nilai transaksi')
-                ->descriptionIcon('heroicon-m-currency-dollar')
+                ->icon('heroicon-m-currency-dollar')
                 ->color('success'),
         ];
     }
