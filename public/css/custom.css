@@ -1,4 +1,15 @@
-/* Login Page Custom Background */
+/* ============================================================
+   Custom CSS - Salestracker | TailAdmin-inspired Theme
+   Filament v3 Compatible — Safe Overrides Only
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* ---- Login Page Background ---- */
 .fi-simple-layout {
     background-image: url('/images/login-bg.jpg') !important;
     background-size: cover !important;
@@ -6,22 +17,277 @@
     background-repeat: no-repeat !important;
 }
 
-/* Sidebar and Main Layout Differentiation */
-.fi-sidebar {
-    background-color: #f1f5f9 !important;
-    border-right: 1px solid #e2e8f0 !important;
+/* ============================================================
+   Global Layout
+   ============================================================ */
+html, body {
+    background-color: #f9fafb !important;
 }
 
+/* Fix text selection color — white text on blue bg */
+::selection {
+    background-color: #465fff !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================
+   SIDEBAR — TailAdmin Style
+   ============================================================ */
+
+/* Sidebar container */
+.fi-sidebar {
+    background-color: #ffffff !important;
+    border-right: 1px solid #e5e7eb !important;
+}
+
+/* Sidebar inner */
+.fi-sidebar-nav {
+    padding: 1rem 0.75rem !important;
+}
+
+/* Group label — "MENU", "SYSTEM", "DATA" etc */
+.fi-sidebar-group-label {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.07em !important;
+    color: #9ca3af !important;
+    text-transform: uppercase !important;
+    padding-left: 0.625rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* All sidebar nav items (link text + icon) */
+.fi-sidebar-item > a,
+.fi-sidebar-item > button,
+.fi-sidebar-item-button {
+    border-radius: 0.5rem !important;
+    color: #374151 !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+/* Hover state */
+.fi-sidebar-item:not(.fi-sidebar-item-active) > a:hover,
+.fi-sidebar-item:not(.fi-sidebar-item-active) > button:hover {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
+}
+
+/* Active item — solid blue like TailAdmin */
+.fi-sidebar-item-active > a,
+.fi-sidebar-item-active > button {
+    background-color: #465fff !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 0.5rem !important;
+}
+
+/* Force ALL children of active item to be white (icons, spans, labels) */
+.fi-sidebar-item-active > a *,
+.fi-sidebar-item-active > button * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* ============================================================
+   TOPBAR — Clean white bar
+   ============================================================ */
+.fi-topbar,
+.fi-topbar nav,
+header.fi-topbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ============================================================
+   MAIN CONTENT — Grey background, narrow left gap
+   ============================================================ */
 .fi-main {
+    background-color: #f9fafb !important;
+    padding-left: 1rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 1rem !important;
+}
+
+/* Content container: full width, no extra max-width margin */
+.fi-main > .fi-main-ctn {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* ============================================================
+   CARDS & WIDGETS — White with subtle shadow
+   ============================================================ */
+.fi-wi-stats-overview-stat,
+.fi-wi-stats-overview-stat-description,
+.fi-wi-chart,
+.fi-ta,
+.fi-section,
+.fi-section-content,
+.fi-section-content-ctn {
     background-color: #ffffff !important;
 }
 
-/* Dark Mode Support */
+.fi-wi-stats-overview-stat,
+.fi-wi-chart,
+.fi-ta,
+.fi-section {
+    border-radius: 0.875rem !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ============================================================
+   USER DROPDOWN — Polished popup
+   ============================================================ */
+.fi-dropdown-panel {
+    border-radius: 0.875rem !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    overflow: hidden !important;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+.dark html,
+.dark body {
+    background-color: #1a1c2e !important;
+}
+
 .dark .fi-sidebar {
-    background-color: #0f172a !important;
-    border-right: 1px solid #1e293b !important;
+    background-color: #1e2030 !important;
+    border-color: #2d3046 !important;
+}
+
+.dark .fi-sidebar-group-label {
+    color: #6b7280 !important;
+}
+
+.dark .fi-sidebar-item > a,
+.dark .fi-sidebar-item > button {
+    color: #d1d5db !important;
+}
+
+.dark .fi-sidebar-item:not(.fi-sidebar-item-active) > a:hover,
+.dark .fi-sidebar-item:not(.fi-sidebar-item-active) > button:hover {
+    background-color: #2d3046 !important;
+    color: #f9fafb !important;
+}
+
+.dark .fi-sidebar-item-active > a,
+.dark .fi-sidebar-item-active > button {
+    background-color: #465fff !important;
+    color: #ffffff !important;
+}
+
+.dark .fi-topbar,
+.dark .fi-topbar nav,
+.dark header.fi-topbar {
+    background-color: #1e2030 !important;
+    border-color: #2d3046 !important;
 }
 
 .dark .fi-main {
-    background-color: #1e293b !important;
+    background-color: #1a1c2e !important;
 }
+
+.dark .fi-wi-stats-overview-stat,
+.dark .fi-wi-chart,
+.dark .fi-ta,
+.dark .fi-section,
+.dark .fi-section-content,
+.dark .fi-section-content-ctn {
+    background-color: #1e2030 !important;
+    border-color: #2d3046 !important;
+}
+
+.dark .fi-dropdown-panel {
+    background-color: #1e2030 !important;
+    border-color: #2d3046 !important;
+}
+
+/* ============================================================
+   TOPBAR THEME SWITCHER BUTTONS
+   ============================================================ */
+
+/* Hide Filament's built-in color scheme switcher from dropdown completely */
+.fi-dropdown-list:has(.fi-theme-switcher) {
+    display: none !important;
+}
+.fi-color-scheme-switcher,
+.fi-theme-switcher {
+    display: none !important;
+}
+
+/* Container */
+.fi-topbar-theme-switcher {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    margin-right: 8px;
+    margin-left: auto !important;
+    order: 1 !important;
+}
+
+/* Reorder user menu and remove auto-margin so switcher is on its left */
+.fi-topbar nav > div.ms-auto {
+    margin-left: 0 !important;
+    margin-inline-start: 0 !important;
+    order: 2 !important;
+}
+
+/* Each button */
+.fi-topbar-theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.fi-topbar-theme-btn:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* Active button */
+.fi-topbar-theme-btn-active {
+    background-color: #ffffff !important;
+    color: #465fff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dark mode versions */
+.dark .fi-topbar-theme-switcher {
+    background-color: #2d3046;
+}
+
+.dark .fi-topbar-theme-btn {
+    color: #6b7280;
+}
+
+.dark .fi-topbar-theme-btn:hover {
+    background-color: #374155;
+    color: #d1d5db;
+}
+
+.dark .fi-topbar-theme-btn-active {
+    background-color: #1e2030 !important;
+    color: #818cf8 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+

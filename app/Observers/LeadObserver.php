@@ -26,12 +26,14 @@ class LeadObserver
 
     public function creating(Lead $lead): void
     {
-        if (Auth::guard('web')->check()) {
-            $user = Auth::guard('web')->user();
-            $lead->cabang = $user->cabang ?? null;
-        } elseif (Auth::guard('mitra')->check()) {
-            $mitra = Auth::guard('mitra')->user();
-            $lead->cabang = $mitra->upline?->cabang ?? null;
+        if (Auth::check()) {
+            $user = Auth::user();
+            
+            if ($user->role === 'mitra') {
+                $lead->cabang = $user->upline?->cabang ?? null;
+            } else {
+                $lead->cabang = $user->cabang ?? null;
+            }
         }
     }
 

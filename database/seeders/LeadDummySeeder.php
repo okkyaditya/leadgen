@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Lead;
 use App\Models\User;
-use App\Models\Mitra;
 use Faker\Factory as Faker;
 
 class LeadDummySeeder extends Seeder
@@ -14,8 +13,8 @@ class LeadDummySeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        $users = User::all();
-        $mitras = Mitra::all();
+        $users = User::where('role', '!=', 'mitra')->get();
+        $mitras = User::where('role', 'mitra')->get();
 
         if ($users->isEmpty()) {
             $this->command->error('No users found in database! Please run DummyDataSeeder first.');
@@ -70,9 +69,9 @@ class LeadDummySeeder extends Seeder
 
             if ($isMitraOwner && !$mitras->isEmpty()) {
                 $mitra = $mitras->random();
-                $ownerType = 'App\Models\Mitra';
+                $ownerType = 'App\Models\User';
                 $ownerId = $mitra->id;
-                $inputBy = $mitra->upline_id ?? $users->random()->id;
+                $inputBy = $mitra->supervisor_id ?? $users->random()->id;
                 $sourceMitraId = $mitra->id;
             } else {
                 $user = $users->random();

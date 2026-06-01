@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Mitra;
 use App\Models\Cabang;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
@@ -77,16 +76,17 @@ class DummyDataSeeder extends Seeder
         $this->command->info('Creating 100 Mitra...');
         $profesiList = ['Karyawan Swasta', 'Wirausaha', 'PNS', 'Ibu Rumah Tangga', 'Mahasiswa', 'Freelance'];
         for ($i = 1; $i <= 100; $i++) {
-            Mitra::create([
-                'nik' => '9090' . str_pad($i, 12, '0', STR_PAD_LEFT),
-                'password' => Hash::make('password'),
+            User::create([
                 'nama' => $faker->name,
+                'nik' => '9090' . str_pad($i, 12, '0', STR_PAD_LEFT),
                 'telepon' => '0899' . str_pad($i, 8, '0', STR_PAD_LEFT),
                 'email' => 'mitra' . $i . '@salestracker.com',
+                'role' => 'mitra',
+                'password' => Hash::make('password'),
                 'profesi' => $faker->randomElement($profesiList),
                 'tanggal_lahir' => now()->subYears(rand(20, 50))->subDays(rand(1, 365))->toDateString(),
                 'domisili' => $faker->randomElement($cabangs),
-                'upline_id' => $faker->randomElement($supportIds),
+                'supervisor_id' => $faker->randomElement($supportIds),
                 'is_active' => true,
             ]);
         }

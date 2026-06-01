@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\Mitra;
+use App\Models\User;
 use Carbon\Carbon;
 
 class DeactivateMitraCommand extends Command
@@ -20,26 +20,30 @@ class DeactivateMitraCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Deactivate Mitra who have not logged in for the past 3 months';
+    protected $description = 'Deactivate Mitra who have not logged in for the past 30 days';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $threeMonthsAgo = Carbon::now()->subMonths(3);
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
 
-        $mitras = Mitra::where('is_active', true)
-            ->where(function ($query) use ($threeMonthsAgo) {
-                $query->where('last_login_at', '<', $threeMonthsAgo)
-                      ->orWhereNull('last_login_at');
+        $mitras = User::where('role', 'mitra')
+            ->where('is_active', true)
+            ->where(function ($query) use ($thirtyDaysAgo) {
+                $query->where('last_login_at', '<', $thirtyDaysAgo)
+                      ->orWhere(function ($q) use ($thirtyDaysAgo) {
+                          $q->whereNull('last_login_at')
+                            ->where('created_at', '<', $thirtyDaysAgo);
+                      });
             })->get();
 
         $count = 0;
         foreach ($mitras as $mitra) {
             $mitra->update([
                 'is_active' => false,
-                'is_active_reason' => 'Sistem otomatis: Tidak ada aktivitas login sejak 3 bulan terakhir.',
+                'is_active_reason' => 'Tidak Ada Aktifitas Selama 30 Hari',
             ]);
             $count++;
         }

@@ -15,6 +15,7 @@ class RolesAndAdminSeeder extends Seeder
         Role::create(['name' => 'manager', 'guard_name' => 'web']);
         Role::create(['name' => 'supervisor', 'guard_name' => 'web']);
         Role::create(['name' => 'support', 'guard_name' => 'web']);
+        Role::create(['name' => 'mitra', 'guard_name' => 'web']);
 
         $admin = User::create([
             'nama' => 'Super Admin',

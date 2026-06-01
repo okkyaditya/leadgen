@@ -10,10 +10,13 @@ class Lead extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const PRODUCTS = ['NDF Car', 'NDF Motor', 'NDF Property', 'Machinery', 'Heavy Equipment', 'DF Mobil', 'DF Motor'];
+    const LEAD_TYPES = ['Cold', 'Warm', 'Hot'];
+
     protected $fillable = [
         'nama', 'telepon', 'nik', 'produk', 'ntf', 
         'unit', 'no_unit', 'owner_type', 'owner_id', 
-        'input_by', 'source_mitra_id', 'cabang', 'domisili'
+        'input_by', 'source_mitra_id', 'cabang', 'domisili', 'tipe_lead'
     ];
 
     public function owner()
@@ -28,6 +31,6 @@ class Lead extends Model
 
     public function sourceMitra()
     {
-        return $this->belongsTo(Mitra::class, 'source_mitra_id');
+        return $this->belongsTo(User::class, 'source_mitra_id');
     }
 }

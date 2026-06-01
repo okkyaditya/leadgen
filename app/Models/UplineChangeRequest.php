@@ -17,7 +17,18 @@ class UplineChangeRequest extends Model
     {
         static::updated(function ($request) {
             if ($request->isDirty('status') && $request->status === 'approved') {
-                $request->mitra->update(['upline_id' => $request->new_upline_id]);
+                // Update the mitra's supervisor/upline and cabang to the newly approved upline
+                $newUpline = User::find($request->new_upline_id);
+                $newCabang = $newUpline ? $newUpline->cabang : null;
+
+                $mitra = User::find($request->mitra_id);
+                if ($mitra) {
+                    $mitra->update([
+                        'supervisor_id' => $request->new_upline_id,
+                        'cabang' => $newCabang
+                    ]);
+                }
+
                 if (!$request->approved_by) {
                     $request->updateQuietly(['approved_by' => auth()->id()]);
                 }
@@ -27,7 +38,7 @@ class UplineChangeRequest extends Model
 
     public function mitra()
     {
-        return $this->belongsTo(Mitra::class);
+        return $this->belongsTo(User::class, 'mitra_id');
     }
 
     public function requestedBy()
