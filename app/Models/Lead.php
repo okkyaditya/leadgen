@@ -11,7 +11,7 @@ class Lead extends Model
     use HasFactory, SoftDeletes;
 
     const PRODUCTS = ['NDF Car', 'NDF Motor', 'NDF Property', 'Machinery', 'Heavy Equipment', 'DF Mobil', 'DF Motor'];
-    const LEAD_TYPES = ['Cold', 'Warm', 'Hot'];
+    const LEAD_TYPES = ['Tanya-tanya', 'Thinking', 'Negotiation', 'Cancel', 'Lose deal', 'Survey', 'Reject', 'Funding'];
 
     protected $fillable = [
         'nama', 'telepon', 'nik', 'produk', 'ntf', 

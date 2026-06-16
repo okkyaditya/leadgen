@@ -124,7 +124,7 @@ class LeadController extends Controller
             'owner_type' => 'App\Models\User',
             'owner_id' => auth()->id(),
             'input_by' => auth()->id(),
-            'source_mitra_id' => $request->source_mitra_id,
+            'source_mitra_id' => auth()->user()->hasRole('mitra') ? auth()->id() : $request->source_mitra_id,
         ]);
 
         return redirect()->back()->with('success', 'Lead berhasil dibuat.');
@@ -142,7 +142,7 @@ class LeadController extends Controller
             'unit' => $request->unit,
             'no_unit' => $request->no_unit,
             'domisili' => $request->domisili,
-            'source_mitra_id' => $request->source_mitra_id,
+            'source_mitra_id' => auth()->user()->hasRole('mitra') ? auth()->id() : $request->source_mitra_id,
         ]);
 
         return redirect()->back()->with('success', 'Lead berhasil diperbarui.');

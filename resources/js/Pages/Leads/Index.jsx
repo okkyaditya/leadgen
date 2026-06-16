@@ -21,7 +21,7 @@ export default function Index({ leads, cabangs, products, mitras, filters }) {
         telepon: '',
         nik: '',
         produk: products[0] || 'NDF Car',
-        tipe_lead: 'Cold',
+        tipe_lead: 'Tanya-tanya',
         ntf: '',
         unit: '',
         no_unit: '',
@@ -49,7 +49,7 @@ export default function Index({ leads, cabangs, products, mitras, filters }) {
             telepon: lead.telepon || '',
             nik: lead.nik || '',
             produk: lead.produk || 'NDF Car',
-            tipe_lead: lead.tipe_lead || 'Cold',
+            tipe_lead: lead.tipe_lead || 'Tanya-tanya',
             ntf: lead.ntf || '',
             unit: lead.unit || '',
             no_unit: lead.no_unit || '',
@@ -124,17 +124,26 @@ export default function Index({ leads, cabangs, products, mitras, filters }) {
         { label: 'Telepon', field: 'telepon' },
         { label: 'Produk', field: 'produk' },
         { 
-            label: 'Tipe Lead', 
+            label: 'Status Leads', 
             field: 'tipe_lead',
-            render: (row) => (
-                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
-                    row.tipe_lead === 'Hot' ? 'bg-rose-500/10 text-rose-500 border border-rose-500/20' :
-                    row.tipe_lead === 'Warm' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' :
-                    'bg-slate-500/10 text-slate-500 border border-slate-500/20'
-                }`}>
-                    {row.tipe_lead || 'Cold'}
-                </span>
-            )
+            render: (row) => {
+                const statusColors = {
+                    'Tanya-tanya': 'bg-slate-500/10 text-slate-500 border border-slate-500/20',
+                    'Thinking': 'bg-blue-500/10 text-blue-500 border border-blue-500/20',
+                    'Negotiation': 'bg-amber-500/10 text-amber-500 border border-amber-500/20',
+                    'Cancel': 'bg-gray-500/10 text-gray-500 border border-gray-500/20',
+                    'Lose deal': 'bg-rose-500/10 text-rose-500 border border-rose-500/20',
+                    'Survey': 'bg-purple-500/10 text-purple-500 border border-purple-500/20',
+                    'Reject': 'bg-red-500/10 text-red-500 border border-red-500/20',
+                    'Funding': 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                };
+                const statusClass = statusColors[row.tipe_lead] || 'bg-slate-500/10 text-slate-500 border border-slate-500/20';
+                return (
+                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${statusClass}`}>
+                        {row.tipe_lead || 'Tanya-tanya'}
+                    </span>
+                );
+            }
         },
         { 
             label: 'Nilai NTF', 
@@ -257,146 +266,113 @@ export default function Index({ leads, cabangs, products, mitras, filters }) {
                         </button>
                     </div>
 
-                    <form onSubmit={handleCreateSubmit} className="mt-4 space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <InputLabel htmlFor="nama" value="Nama Lengkap" />
-                                <TextInput
-                                    id="nama"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.nama}
-                                    onChange={(e) => createForm.setData('nama', e.target.value)}
-                                    placeholder="Nama Lengkap"
-                                    required
-                                />
-                                <InputError message={createForm.errors.nama} className="mt-2" />
-                            </div>
+                    <form onSubmit={handleCreateSubmit} className="mt-4 flex flex-col">
+                        <div className="max-h-[60vh] overflow-y-auto px-1 space-y-4 pb-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <InputLabel htmlFor="nama" value="Nama Lengkap" />
+                                    <TextInput
+                                        id="nama"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={createForm.data.nama}
+                                        onChange={(e) => createForm.setData('nama', e.target.value)}
+                                        placeholder="Nama Lengkap"
+                                        required
+                                    />
+                                    <InputError message={createForm.errors.nama} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="nik" value="No. KTP" />
-                                <TextInput
-                                    id="nik"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.nik}
-                                    onChange={(e) => createForm.setData('nik', e.target.value)}
-                                    placeholder="1234567891234567"
-                                    maxLength={16}
-                                    required
-                                />
-                                <InputError message={createForm.errors.nik} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="nik" value="No. KTP" />
+                                    <TextInput
+                                        id="nik"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={createForm.data.nik}
+                                        onChange={(e) => createForm.setData('nik', e.target.value)}
+                                        placeholder="1234567891234567"
+                                        maxLength={16}
+                                        required
+                                    />
+                                    <InputError message={createForm.errors.nik} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="telepon" value="Telepon" />
-                                <TextInput
-                                    id="telepon"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.telepon}
-                                    onChange={(e) => createForm.setData('telepon', e.target.value)}
-                                    placeholder="08xxxxxxxxxx"
-                                    maxLength={16}
-                                    required
-                                />
-                                <InputError message={createForm.errors.telepon} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="telepon" value="Telepon" />
+                                    <TextInput
+                                        id="telepon"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={createForm.data.telepon}
+                                        onChange={(e) => createForm.setData('telepon', e.target.value)}
+                                        placeholder="08xxxxxxxxxx"
+                                        maxLength={16}
+                                        required
+                                    />
+                                    <InputError message={createForm.errors.telepon} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="produk" value="Produk" />
-                                <select
-                                    id="produk"
-                                    value={createForm.data.produk}
-                                    onChange={(e) => createForm.setData('produk', e.target.value)}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
-                                >
-                                    <option value="" disabled>Pilih Produk</option>
-                                    {products.map(p => (
-                                        <option key={p} value={p}>{p}</option>
-                                    ))}
-                                </select>
-                                <InputError message={createForm.errors.produk} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="produk" value="Produk" />
+                                    <select
+                                        id="produk"
+                                        value={createForm.data.produk}
+                                        onChange={(e) => createForm.setData('produk', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                    >
+                                        <option value="" disabled>Pilih Produk</option>
+                                        {products.map(p => (
+                                            <option key={p} value={p}>{p}</option>
+                                        ))}
+                                    </select>
+                                    <InputError message={createForm.errors.produk} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="tipe_lead" value="Tipe Lead" />
-                                <select
-                                    id="tipe_lead"
-                                    value={createForm.data.tipe_lead}
-                                    onChange={(e) => createForm.setData('tipe_lead', e.target.value)}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
-                                >
-                                    <option value="Cold">Cold</option>
-                                    <option value="Warm">Warm</option>
-                                    <option value="Hot">Hot</option>
-                                </select>
-                                <InputError message={createForm.errors.tipe_lead} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="no_unit" value="Nomor Unit" />
+                                    <TextInput
+                                        id="no_unit"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={createForm.data.no_unit}
+                                        onChange={(e) => createForm.setData('no_unit', e.target.value)}
+                                        placeholder="B xxxx ABC"
+                                    />
+                                    <InputError message={createForm.errors.no_unit} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="ntf" value="Nilai NTF" />
-                                <TextInput
-                                    id="ntf"
-                                    type="number"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.ntf}
-                                    onChange={(e) => createForm.setData('ntf', e.target.value)}
-                                    placeholder="Rp 100.000.000"
-                                />
-                                <InputError message={createForm.errors.ntf} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="tipe_lead" value="Status Leads" />
+                                    <select
+                                        id="tipe_lead"
+                                        value={createForm.data.tipe_lead}
+                                        onChange={(e) => createForm.setData('tipe_lead', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                    >
+                                        <option value="Tanya-tanya">Tanya-tanya</option>
+                                        <option value="Thinking">Thinking</option>
+                                        <option value="Negotiation">Negotiation</option>
+                                        <option value="Cancel">Cancel</option>
+                                        <option value="Lose deal">Lose deal</option>
+                                        <option value="Survey">Survey</option>
+                                        <option value="Reject">Reject</option>
+                                        <option value="Funding">Funding</option>
+                                    </select>
+                                    <InputError message={createForm.errors.tipe_lead} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="domisili" value="Domisili" />
-                                <TextInput
-                                    id="domisili"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.domisili}
-                                    onChange={(e) => createForm.setData('domisili', e.target.value)}
-                                    placeholder="Isi Domisili"
-                                    required
-                                />
-                                <InputError message={createForm.errors.domisili} className="mt-2" />
-                            </div>
-
-                            <div>
-                                <InputLabel htmlFor="unit" value="Asset" />
-                                <TextInput
-                                    id="unit"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.unit}
-                                    onChange={(e) => createForm.setData('unit', e.target.value)}
-                                    placeholder="Toyota Avanza"
-                                />
-                                <InputError message={createForm.errors.unit} className="mt-2" />
-                            </div>
-
-                            <div>
-                                <InputLabel htmlFor="no_unit" value="Nomor Unit" />
-                                <TextInput
-                                    id="no_unit"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={createForm.data.no_unit}
-                                    onChange={(e) => createForm.setData('no_unit', e.target.value)}
-                                    placeholder="B xxxx ABC"
-                                />
-                                <InputError message={createForm.errors.no_unit} className="mt-2" />
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <InputLabel htmlFor="owner" value="Pemilik Lead" />
-                                <TextInput
-                                    id="owner"
-                                    type="text"
-                                    className="mt-1 block w-full bg-gray-100 dark:bg-gray-800 text-gray-500 cursor-not-allowed"
-                                    value={currentUser.nama}
-                                    disabled
-                                    readOnly
-                                />
+                                <div className="md:col-span-2">
+                                    <InputLabel htmlFor="owner" value="Pemilik Lead" />
+                                    <TextInput
+                                        id="owner"
+                                        type="text"
+                                        className="mt-1 block w-full bg-gray-100 dark:bg-gray-800 text-gray-500 cursor-not-allowed"
+                                        value={currentUser.nama}
+                                        disabled
+                                        readOnly
+                                    />
+                                </div>
                             </div>
                         </div>
 
@@ -430,145 +406,112 @@ export default function Index({ leads, cabangs, products, mitras, filters }) {
                         </button>
                     </div>
 
-                    <form onSubmit={handleEditSubmit} className="mt-4 space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <InputLabel htmlFor="edit_nama" value="Nama Lengkap" />
-                                <TextInput
-                                    id="edit_nama"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.nama}
-                                    onChange={(e) => editForm.setData('nama', e.target.value)}
-                                    placeholder="Nama Lengkap"
-                                    required
-                                />
-                                <InputError message={editForm.errors.nama} className="mt-2" />
-                            </div>
+                    <form onSubmit={handleEditSubmit} className="mt-4 flex flex-col">
+                        <div className="max-h-[60vh] overflow-y-auto px-1 space-y-4 pb-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <InputLabel htmlFor="edit_nama" value="Nama Lengkap" />
+                                    <TextInput
+                                        id="edit_nama"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={editForm.data.nama}
+                                        onChange={(e) => editForm.setData('nama', e.target.value)}
+                                        placeholder="Nama Lengkap"
+                                        required
+                                    />
+                                    <InputError message={editForm.errors.nama} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_nik" value="No. KTP" />
-                                <TextInput
-                                    id="edit_nik"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.nik}
-                                    onChange={(e) => editForm.setData('nik', e.target.value)}
-                                    placeholder="1234567891234567"
-                                    maxLength={16}
-                                    required
-                                />
-                                <InputError message={editForm.errors.nik} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="edit_nik" value="No. KTP" />
+                                    <TextInput
+                                        id="edit_nik"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={editForm.data.nik}
+                                        onChange={(e) => editForm.setData('nik', e.target.value)}
+                                        placeholder="1234567891234567"
+                                        maxLength={16}
+                                        required
+                                    />
+                                    <InputError message={editForm.errors.nik} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_telepon" value="Telepon" />
-                                <TextInput
-                                    id="edit_telepon"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.telepon}
-                                    onChange={(e) => editForm.setData('telepon', e.target.value)}
-                                    placeholder="08xxxxxxxxxx"
-                                    maxLength={16}
-                                    required
-                                />
-                                <InputError message={editForm.errors.telepon} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="edit_telepon" value="Telepon" />
+                                    <TextInput
+                                        id="edit_telepon"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={editForm.data.telepon}
+                                        onChange={(e) => editForm.setData('telepon', e.target.value)}
+                                        placeholder="08xxxxxxxxxx"
+                                        maxLength={16}
+                                        required
+                                    />
+                                    <InputError message={editForm.errors.telepon} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_produk" value="Produk" />
-                                <select
-                                    id="edit_produk"
-                                    value={editForm.data.produk}
-                                    onChange={(e) => editForm.setData('produk', e.target.value)}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
-                                >
-                                    {products.map(p => (
-                                        <option key={p} value={p}>{p}</option>
-                                    ))}
-                                </select>
-                                <InputError message={editForm.errors.produk} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="edit_produk" value="Produk" />
+                                    <select
+                                        id="edit_produk"
+                                        value={editForm.data.produk}
+                                        onChange={(e) => editForm.setData('produk', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                    >
+                                        {products.map(p => (
+                                            <option key={p} value={p}>{p}</option>
+                                        ))}
+                                    </select>
+                                    <InputError message={editForm.errors.produk} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_tipe_lead" value="Tipe Lead" />
-                                <select
-                                    id="edit_tipe_lead"
-                                    value={editForm.data.tipe_lead}
-                                    onChange={(e) => editForm.setData('tipe_lead', e.target.value)}
-                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
-                                >
-                                    <option value="Cold">Cold</option>
-                                    <option value="Warm">Warm</option>
-                                    <option value="Hot">Hot</option>
-                                </select>
-                                <InputError message={editForm.errors.tipe_lead} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="edit_no_unit" value="Nomor Unit" />
+                                    <TextInput
+                                        id="edit_no_unit"
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        value={editForm.data.no_unit}
+                                        onChange={(e) => editForm.setData('no_unit', e.target.value)}
+                                        placeholder="B xxxx ABC"
+                                    />
+                                    <InputError message={editForm.errors.no_unit} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_ntf" value="Nilai NTF" />
-                                <TextInput
-                                    id="edit_ntf"
-                                    type="number"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.ntf}
-                                    onChange={(e) => editForm.setData('ntf', e.target.value)}
-                                    placeholder="Rp 100.000.000"
-                                />
-                                <InputError message={editForm.errors.ntf} className="mt-2" />
-                            </div>
+                                <div>
+                                    <InputLabel htmlFor="edit_tipe_lead" value="Status Leads" />
+                                    <select
+                                        id="edit_tipe_lead"
+                                        value={editForm.data.tipe_lead}
+                                        onChange={(e) => editForm.setData('tipe_lead', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-accent focus:ring-brand-accent dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                    >
+                                        <option value="Tanya-tanya">Tanya-tanya</option>
+                                        <option value="Thinking">Thinking</option>
+                                        <option value="Negotiation">Negotiation</option>
+                                        <option value="Cancel">Cancel</option>
+                                        <option value="Lose deal">Lose deal</option>
+                                        <option value="Survey">Survey</option>
+                                        <option value="Reject">Reject</option>
+                                        <option value="Funding">Funding</option>
+                                    </select>
+                                    <InputError message={editForm.errors.tipe_lead} className="mt-2" />
+                                </div>
 
-                            <div>
-                                <InputLabel htmlFor="edit_domisili" value="Domisili" />
-                                <TextInput
-                                    id="edit_domisili"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.domisili}
-                                    onChange={(e) => editForm.setData('domisili', e.target.value)}
-                                    placeholder="Isi Domisili"
-                                    required
-                                />
-                                <InputError message={editForm.errors.domisili} className="mt-2" />
-                            </div>
-
-                            <div>
-                                <InputLabel htmlFor="edit_unit" value="Asset" />
-                                <TextInput
-                                    id="edit_unit"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.unit}
-                                    onChange={(e) => editForm.setData('unit', e.target.value)}
-                                    placeholder="Toyota Avanza"
-                                />
-                                <InputError message={editForm.errors.unit} className="mt-2" />
-                            </div>
-
-                            <div>
-                                <InputLabel htmlFor="edit_no_unit" value="Nomor Unit" />
-                                <TextInput
-                                    id="edit_no_unit"
-                                    type="text"
-                                    className="mt-1 block w-full"
-                                    value={editForm.data.no_unit}
-                                    onChange={(e) => editForm.setData('no_unit', e.target.value)}
-                                    placeholder="B xxxx ABC"
-                                />
-                                <InputError message={editForm.errors.no_unit} className="mt-2" />
-                            </div>
-
-                            <div className="md:col-span-2">
-                                <InputLabel htmlFor="edit_owner" value="Pemilik Lead" />
-                                <TextInput
-                                    id="edit_owner"
-                                    type="text"
-                                    className="mt-1 block w-full bg-gray-100 dark:bg-gray-800 text-gray-500 cursor-not-allowed"
-                                    value={selectedLead?.input_by?.nama || currentUser.nama}
-                                    disabled
-                                    readOnly
-                                />
+                                <div className="md:col-span-2">
+                                    <InputLabel htmlFor="edit_owner" value="Pemilik Lead" />
+                                    <TextInput
+                                        id="edit_owner"
+                                        type="text"
+                                        className="mt-1 block w-full bg-gray-100 dark:bg-gray-800 text-gray-500 cursor-not-allowed"
+                                        value={selectedLead?.input_by?.nama || currentUser.nama}
+                                        disabled
+                                        readOnly
+                                    />
+                                </div>
                             </div>
                         </div>
 

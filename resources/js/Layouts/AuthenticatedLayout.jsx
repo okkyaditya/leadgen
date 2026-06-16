@@ -103,7 +103,7 @@ export default function AuthenticatedLayout({ header, children }) {
             icon: BookOpen,
             href: route('documentation.index'),
             active: route().current('documentation.*'),
-            roles: ['admin', 'manager', 'supervisor', 'support', 'mitra']
+            roles: ['admin', 'manager', 'supervisor']
         }
     ];
 
