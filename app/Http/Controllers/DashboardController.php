@@ -14,26 +14,6 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Auto-deactivate Mitra who have no login activity for 30 days
-        $thirtyDaysAgo = \Carbon\Carbon::now()->subDays(30);
-        $inactiveMitras = User::where('role', 'mitra')
-            ->where('is_active', true)
-            ->where(function ($query) use ($thirtyDaysAgo) {
-                $query->where('last_login_at', '<', $thirtyDaysAgo)
-                      ->orWhere(function ($q) use ($thirtyDaysAgo) {
-                          $q->whereNull('last_login_at')
-                            ->where('created_at', '<', $thirtyDaysAgo);
-                      });
-            })
-            ->get();
-
-        foreach ($inactiveMitras as $mitra) {
-            $mitra->update([
-                'is_active' => false,
-                'is_active_reason' => 'Tidak Ada Aktifitas Selama 30 Hari'
-            ]);
-        }
-
         // Initialize Queries
         $mitraQuery = User::where('role', 'mitra');
         $userQuery = User::whereIn('role', ['manager', 'supervisor', 'support']);
