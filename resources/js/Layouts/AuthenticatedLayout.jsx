@@ -117,11 +117,11 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div className="flex items-center gap-3">
                     <img 
                         src="/images/icons8-magnet-96.png" 
-                        alt="Lead Magnet Logo" 
+                        alt="Leads Tracker Logo" 
                         className="h-8 w-8 object-contain" 
                     />
                     <span className="font-bold text-lg tracking-wide bg-gradient-to-r from-brand-accent to-brand-primary bg-clip-text text-transparent">
-                        Lead Magnet
+                        Leads Tracker
                     </span>
                 </div>
                 <div className="flex items-center gap-4">
@@ -154,11 +154,11 @@ export default function AuthenticatedLayout({ header, children }) {
                 <div className="flex h-16 items-center gap-3 px-6 border-b border-gray-200 dark:border-gray-800">
                     <img 
                         src="/images/icons8-magnet-96.png" 
-                        alt="Lead Magnet Logo" 
+                        alt="Leads Tracker Logo" 
                         className="h-9 w-9 object-contain" 
                     />
                     <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-brand-accent to-brand-primary bg-clip-text text-transparent">
-                        Lead Magnet
+                        Leads Tracker
                     </span>
                 </div>
 

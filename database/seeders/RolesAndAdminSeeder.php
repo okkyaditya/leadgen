@@ -21,7 +21,7 @@ class RolesAndAdminSeeder extends Seeder
             'nama' => 'Super Admin',
             'nik' => '1234567890123456',
             'telepon' => '081234567890',
-            'email' => 'admin@salestracker.com',
+            'email' => 'admin@leadstracker.com',
             'role' => 'admin',
             'cabang' => 'Pusat',
             'password' => Hash::make('password'),

@@ -35,12 +35,12 @@ export default function Welcome({ auth }) {
                     
                     <img 
                         src="/images/icons8-magnet-96.png" 
-                        alt="Lead Magnet Logo" 
+                        alt="Leads Tracker Logo" 
                         className="h-16 w-16 object-contain animate-bounce" 
                     />
                     
                     <h2 className="mt-4 text-xl font-black tracking-widest bg-gradient-to-r from-brand-accent to-brand-primary bg-clip-text text-transparent">
-                        LEAD MAGNET
+                        LEADS TRACKER
                     </h2>
                     
                     <div className="flex items-center gap-2 text-xs text-slate-500 font-semibold mt-2">
@@ -78,7 +78,18 @@ export default function Welcome({ auth }) {
                 backgroundRepeat: 'no-repeat'
             }}
         >
-            <Head title="Welcome to Lead Magnet" />
+            <Head title="Welcome to Leads Tracker">
+                <meta name="description" content="Leads Tracker - Next-Gen platform to maximize sales, track leads, and accelerate commercial growth. Collaborate seamlessly with your sales team." />
+                <meta name="keywords" content="leads tracker, sales tracker, lead management, sales pipeline, commercial growth" />
+                <meta property="og:title" content="Leads Tracker - Next-Gen Analytics Platform" />
+                <meta property="og:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team." />
+                <meta property="og:image" content="/images/icons8-magnet-96.png" />
+                <meta property="og:type" content="website" />
+                <meta property="twitter:card" content="summary" />
+                <meta property="twitter:title" content="Leads Tracker - Next-Gen Analytics Platform" />
+                <meta property="twitter:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team." />
+                <meta property="twitter:image" content="/images/icons8-magnet-96.png" />
+            </Head>
 
             {/* Main Hero Section */}
             <main className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12 flex-1 flex flex-col items-center justify-center text-center">
@@ -93,11 +104,11 @@ export default function Welcome({ auth }) {
                     <motion.div variants={fadeUp} className="flex flex-col items-center gap-3 mb-8 select-none">
                         <img 
                             src="/images/icons8-magnet-96.png" 
-                            alt="Lead Magnet Logo" 
+                            alt="Leads Tracker Logo" 
                             className="h-16 w-16 object-contain" 
                         />
                         <span className="font-extrabold text-2xl sm:text-3xl tracking-wider bg-gradient-to-r from-brand-accent to-brand-primary bg-clip-text text-transparent">
-                            Lead Magnet
+                            Leads Tracker
                         </span>
                     </motion.div>
 
@@ -115,7 +126,7 @@ export default function Welcome({ auth }) {
 
                     {/* Hero Subtitle */}
                     <motion.p variants={fadeUp} className="mt-6 text-sm sm:text-base text-slate-500 dark:text-slate-400 max-w-2xl font-medium leading-relaxed">
-                        Lead Magnet empowers your team to collaborate seamlessly, capture high-quality leads, and accelerate commercial growth in one united platform.
+                        Leads Tracker empowers your team to collaborate seamlessly, capture high-quality leads, and accelerate commercial growth in one united platform.
                     </motion.p>
 
                     {/* CTA Section */}
@@ -143,7 +154,7 @@ export default function Welcome({ auth }) {
                 transition={{ duration: 1, delay: 0.8 }}
                 className="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 border-t border-slate-200/50 dark:border-slate-800/50 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4"
             >
-                <p>&copy; {new Date().getFullYear()} Lead Magnet. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Leads Tracker. All rights reserved.</p>
                 <p className="flex items-center gap-1">
                     <span>Made with</span>
                     <Heart size={12} className="text-rose-500 fill-rose-500" />
