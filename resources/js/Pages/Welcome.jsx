@@ -34,7 +34,7 @@ export default function Welcome({ auth }) {
                     <div className="absolute h-20 w-20 animate-ping rounded-full bg-brand-accent/20" />
                     
                     <img 
-                        src="/images/icons8-magnet-96.png" 
+                        src="/images/favicon_io/android-chrome-192x192.png" 
                         alt="Leads Tracker Logo" 
                         className="h-16 w-16 object-contain animate-bounce" 
                     />
@@ -83,12 +83,12 @@ export default function Welcome({ auth }) {
                 <meta name="keywords" content="leads tracker, sales tracker, lead management, sales pipeline, commercial growth" />
                 <meta property="og:title" content="Leads Tracker - Next-Gen Analytics Platform" />
                 <meta property="og:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team." />
-                <meta property="og:image" content="/images/icons8-magnet-96.png" />
+                <meta property="og:image" content="/images/favicon_io/android-chrome-512x512.png" />
                 <meta property="og:type" content="website" />
                 <meta property="twitter:card" content="summary" />
                 <meta property="twitter:title" content="Leads Tracker - Next-Gen Analytics Platform" />
                 <meta property="twitter:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team." />
-                <meta property="twitter:image" content="/images/icons8-magnet-96.png" />
+                <meta property="twitter:image" content="/images/favicon_io/android-chrome-512x512.png" />
             </Head>
 
             {/* Main Hero Section */}
@@ -103,7 +103,7 @@ export default function Welcome({ auth }) {
                     {/* Centered Logo and Brand Name */}
                     <motion.div variants={fadeUp} className="flex flex-col items-center gap-3 mb-8 select-none">
                         <img 
-                            src="/images/icons8-magnet-96.png" 
+                            src="/images/favicon_io/android-chrome-192x192.png" 
                             alt="Leads Tracker Logo" 
                             className="h-16 w-16 object-contain" 
                         />

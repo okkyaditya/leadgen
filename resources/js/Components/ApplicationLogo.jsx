@@ -1,7 +1,7 @@
 export default function ApplicationLogo(props) {
     return (
         <img 
-            src="/images/icons8-magnet-96.png" 
+            src="/images/favicon_io/android-chrome-192x192.png" 
             alt="Leads Tracker Logo" 
             {...props} 
             className={`object-contain ${props.className || 'h-16 w-16'}`}

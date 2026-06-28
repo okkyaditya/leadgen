@@ -116,7 +116,7 @@ export default function AuthenticatedLayout({ header, children }) {
             <div className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900 lg:hidden">
                 <div className="flex items-center gap-3">
                     <img 
-                        src="/images/icons8-magnet-96.png" 
+                        src="/images/favicon_io/android-chrome-192x192.png" 
                         alt="Leads Tracker Logo" 
                         className="h-8 w-8 object-contain" 
                     />
@@ -153,7 +153,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 {/* Brand Logo */}
                 <div className="flex h-16 items-center gap-3 px-6 border-b border-gray-200 dark:border-gray-800">
                     <img 
-                        src="/images/icons8-magnet-96.png" 
+                        src="/images/favicon_io/android-chrome-192x192.png" 
                         alt="Leads Tracker Logo" 
                         className="h-9 w-9 object-contain" 
                     />

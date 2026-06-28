@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title inertia>{{ config('app.name', 'Leads Tracker') }}</title>
 
         <!-- SEO Meta Tags -->
         <meta name="description" content="Leads Tracker - Next-Gen platform to maximize sales, track leads, and accelerate commercial growth.">
@@ -20,18 +20,21 @@
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:title" content="Leads Tracker - Next-Gen Analytics Platform">
         <meta property="og:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team.">
-        <meta property="og:image" content="{{ asset('images/icons8-magnet-96.png') }}">
+        <meta property="og:image" content="{{ asset('images/favicon_io/android-chrome-512x512.png') }}">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary">
         <meta property="twitter:url" content="{{ url()->current() }}">
         <meta property="twitter:title" content="Leads Tracker - Next-Gen Analytics Platform">
         <meta property="twitter:description" content="Maximize sales, track leads, and grow faster. Collaborate seamlessly with your sales team.">
-        <meta property="twitter:image" content="{{ asset('images/icons8-magnet-96.png') }}">
+        <meta property="twitter:image" content="{{ asset('images/favicon_io/android-chrome-512x512.png') }}">
 
         <!-- Favicons -->
-        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/icons8-magnet-96.png') }}">
-        <link rel="apple-touch-icon" href="{{ asset('images/icons8-magnet-96.png') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon_io/favicon.ico') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon_io/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon_io/favicon-16x16.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon_io/apple-touch-icon.png') }}">
+        <link rel="manifest" href="{{ asset('images/favicon_io/site.webmanifest') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
